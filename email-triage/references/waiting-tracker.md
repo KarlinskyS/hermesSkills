@@ -1,9 +1,3 @@
----
-name: email-triage-waiting
-description: Track threads where the next meaningful move belongs to another party, with follow-up timing and compact visibility.
-category: productivity
----
-
 # Waiting / Follow-up Tracker
 
 ## Goal
@@ -65,7 +59,7 @@ For digest:
 If waiting item crosses follow-up window:
 - flag it in digest as overdue waiting
 - optionally move into `needs-follow-up` note inside digest
-- do not auto-create Linear unless the wait itself becomes project work
+- do not create Linear automatically; surface it as a candidate and wait for a direct user command
 
 ## Anti-Patterns
 

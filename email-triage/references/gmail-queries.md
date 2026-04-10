@@ -1,9 +1,3 @@
----
-name: email-triage-queries
-description: Gmail query patterns for high-signal triage, newsletters, finance, reply pressure, and stale inbox review.
-category: productivity
----
-
 # Gmail Query Patterns
 
 ## Goal

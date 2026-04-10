@@ -1,10 +1,4 @@
----
-name: email-triage-newsletters
-description: Process newsletters separately from work email, summarize in Russian by default, and do full translation only for configured senders.
-category: productivity
----
-
-# Newsletter Handler
+# Newsletter Handling
 
 ## Goal
 

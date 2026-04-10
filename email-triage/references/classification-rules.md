@@ -1,9 +1,3 @@
----
-name: email-triage-classifier
-description: Classify Gmail messages using operational buckets, confidence thresholds, and durable-vs-local action logic.
-category: productivity
----
-
 # Email Classifier
 
 ## Goal
@@ -119,7 +113,7 @@ Allowed actions:
 - label
 - route
 - archive if safe
-- create/match Linear if relevant
+- prepare a Linear recommendation if relevant, but wait for a direct user command before create/match
 
 ### Medium
 Important but partially ambiguous.
@@ -127,7 +121,7 @@ Allowed actions:
 - classify conservatively
 - summarize for review
 - keep in inbox if needed
-- do not create a new Linear issue unless duplication risk is low
+- do not create a new Linear issue; at most prepare a candidate and note duplication risk
 
 ### Low
 Unclear sender intent, unclear ownership, unclear value.

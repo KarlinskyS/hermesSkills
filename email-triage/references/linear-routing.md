@@ -1,16 +1,11 @@
----
-name: email-triage-linear
-description: Promote only durable email work into Linear, with deduplication, issue shaping, and safe escalation rules.
-category: productivity
----
-
-# Linear Promotion Skill
+# Linear Promotion Guide
 
 ## Goal
 
 Protect Linear from inbox trash.
 
-This skill exists to ensure that only durable, track-worthy work becomes an issue.
+This guide exists to ensure that only durable, track-worthy work becomes an issue.
+By default this guide is advisory only. Do not create or update Linear unless the user explicitly asked for it.
 
 ## Never Create a Linear Issue For
 
@@ -31,6 +26,7 @@ Promote to Linear only if:
 - it may span multiple steps or time
 - the owner is effectively the user / user team
 - duplicate check is completed
+- the user directly told the agent to create, match, or check a Linear task
 
 ## Required Inputs
 
@@ -63,7 +59,7 @@ If open issue already exists:
 
 If multiple possible matches:
 - mark as `possible-duplicate`
-- avoid automatic creation unless evidence strongly favors a new issue
+- do not create automatically; present the possible matches and wait for user instruction
 
 ## Issue Title Rules
 
@@ -114,9 +110,11 @@ Return one of:
 - `created`
 - `matched`
 - `possible-duplicate`
+- `candidate` with recommendation
 - `rejected` with reason
 
 Include:
+- digest ref such as `A1`
 - recommended title
 - short rationale
 - issue id/link if available
@@ -124,6 +122,7 @@ Include:
 ## Anti-Patterns
 
 - creating issue from every human request
+- creating issue without an explicit user command
 - copying the subject line as task title
 - skipping dedupe
 - creating issues for “reply and done” work

@@ -1,20 +1,14 @@
----
-name: email-triage-core
-description: Orchestrate Gmail triage in batches, classify messages, route them to the right processing path, and produce a compact Russian digest.
-category: productivity
----
-
 # Email Triage Core
 
 ## Objective
 
 Convert Gmail inbox into a decision pipeline.
 
-This skill must:
+This workflow must:
 - fetch high-signal email batches
 - avoid expensive full reads unless necessary
 - classify email into operational buckets
-- route durable work into Linear only when justified
+- identify durable work that may belong in Linear, but never create a task automatically
 - keep reply-only work out of project tracking
 - isolate newsletters from real work
 - track external waiting states
@@ -23,7 +17,8 @@ This skill must:
 ## Hard Rules
 
 - Never delete email automatically.
-- Never create Linear tasks before duplicate check.
+- Never create Linear tasks automatically.
+- Never create Linear tasks before duplicate check and a direct user command.
 - Never treat every actionable sentence as a task.
 - Never translate every newsletter in full by default.
 - Never archive ambiguous important mail too early.
@@ -50,7 +45,7 @@ Email is processed in 4 layers:
 
 4. **Routing**
    Send email into one of these paths:
-   - action / project work -> Linear path
+   - action / project work -> action candidate, optionally prepare Linear recommendation
    - reply-only -> reply bucket
    - waiting -> waiting tracker
    - newsletter -> newsletter handler
@@ -61,7 +56,7 @@ Email is processed in 4 layers:
 
 | Bucket | Meaning | Typical outcome |
 |---|---|---|
-| action | durable work item | create or match Linear issue |
+| action | durable work item | keep as task candidate, create Linear only on direct command |
 | reply | user needs to respond | keep visible, include in digest |
 | waiting | another party owes response | track follow-up |
 | read-later | newsletter/article | summarize, optionally archive |
@@ -140,6 +135,7 @@ For important emails extract:
 - not just a quick reply
 - there is enough clarity to write a task title
 - dedupe check is possible
+- the user explicitly asked to create or check a Linear task
 
 ### Route to `email-triage-newsletters` if:
 - sender matches newsletter pattern
@@ -188,5 +184,13 @@ Always produce a Russian digest grouped as:
 - Финансы / документы
 - Рассылки / почитать
 - Шум / на проверку
+
+Every item in the digest must include a short ref code:
+- `A#` for action
+- `R#` for reply
+- `W#` for waiting
+- `F#` for finance
+- `N#` for newsletters
+- `Z#` for noise
 
 If no items in a group, omit the group.
