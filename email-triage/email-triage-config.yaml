@@ -1,0 +1,71 @@
+version: 1
+
+user_profile:
+  language: ru
+  digest_language: ru
+  timezone: Asia/Jerusalem
+
+triage:
+  batch_size: 50
+  archive_safe_items: true
+  never_delete_automatically: true
+  read_full_body_only_when_needed: true
+  default_confidence_behavior:
+    high: act
+    medium: review
+    low: ask
+
+gmail:
+  labels:
+    action: triage/action
+    reply: triage/reply
+    waiting: triage/waiting
+    read_later: triage/read-later
+    reference: triage/reference
+    finance: triage/finance
+    noise: triage/noise
+
+  query_passes:
+    high_signal: "in:inbox is:unread -category:promotions -category:social"
+    newsletters: "in:inbox is:unread (category:updates OR category:forums OR has:unsubscribe)"
+    finance: "in:inbox (is:unread OR newer_than:7d) (invoice OR receipt OR billing OR payment OR contract OR subscription)"
+    stale_review: "in:inbox is:unread older_than:7d"
+
+linear:
+  enabled: true
+  workspace: Ieffai
+  team: IEF
+  create_only_for_durable_work: true
+  require_duplicate_check: true
+  reject_reply_only_items: true
+
+newsletters:
+  mode: summarize
+  full_translate_senders: []
+  deep_dive_senders: []
+  deep_dive_topics:
+    - ai engineering
+    - frontend architecture
+    - startups
+  suppress_sponsor_blocks: true
+
+waiting:
+  default_follow_up_business_days:
+    scheduling: 2
+    finance: 3
+    legal: 3
+    client: 2
+    generic: 4
+
+sender_rules:
+  vip_senders: []
+  always_reference_domains: []
+  always_noise_domains: []
+  always_finance_senders: []
+  newsletter_senders: []
+
+output:
+  include_empty_sections: false
+  max_newsletters_in_digest: 5
+  max_noise_items_in_digest: 10
+  compact_mode: true
